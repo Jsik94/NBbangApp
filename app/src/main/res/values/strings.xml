@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">NBbangApp</string>
+    <string name="tv_loading1">나의 효율적인 소비습관</string>
+    <string-array name="tv_loading2">
+        <item>쉽고 편리한 결제</item>
+        <item>엔빵과 함께하세요</item>
+    </string-array>
+</resources>

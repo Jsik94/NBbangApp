@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "525611982826",
+    "project_id": "nbbang-fcm",
+    "storage_bucket": "nbbang-fcm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525611982826:android:51578d16dd73c82a851c93",
+        "android_client_info": {
+          "package_name": "com.kosmo.nbbangapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525611982826-6b0o9n2q4drf9bi5a1c1u64gtghule32.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kosmo.nbbangapp",
+            "certificate_hash": "6531c42402bb6c93c1f02c0c56219d3620dda130"
+          }
+        },
+        {
+          "client_id": "525611982826-fkkunrkjsnk4l6kot2df7sqrljl0akbq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsNzE9kuqEckuXV8g8gYPm7tWX3JvCPxQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525611982826-fkkunrkjsnk4l6kot2df7sqrljl0akbq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
