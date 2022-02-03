@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/nav_icon_profile"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_baseline_account_box_24"
+        android:layout_centerVertical="true"/>
+
+
+    <TextView
+        android:id="@+id/nav_header_text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="나는 회원이야"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_toRightOf="@id/nav_icon_profile"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        />
+
+    <TextView
+        android:id="@+id/nav_header_text_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nav_icon_profile"
+        android:layout_marginTop="28dp"
+        android:paddingTop="10dp"
+        android:layout_marginLeft="32dp"
+        android:text="email@email.com"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white"
+        android:textStyle="italic" />
+
+    <View
+        android:id="@+id/duo_view_header_border"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_below="@+id/nav_header_text_subtitle"
+        android:layout_marginTop="32dp"
+        android:background="@android:color/white"/>
+
+</RelativeLayout>
