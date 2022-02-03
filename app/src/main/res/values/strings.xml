@@ -1,6 +1,33 @@
 <resources>
+    <array name="menuOptions">
+        <item>Home</item>
+        <item>Profile</item>
+        <item>Party</item>
+        <item>Community</item>
+        <item>Calendar</item>
+    </array>
     <string name="app_name">NBbangApp</string>
     <string name="tv_loading1">나의 효율적인 소비습관</string>
+    <string name="title_activity_test">test</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="first_fragment_label">First Fragment</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string-array name="tv_loading2">
         <item>쉽고 편리한 결제</item>
         <item>엔빵과 함께하세요</item>
