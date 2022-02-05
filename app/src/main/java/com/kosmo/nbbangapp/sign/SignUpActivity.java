@@ -1,6 +1,7 @@
 package com.kosmo.nbbangapp.sign;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,14 +17,27 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import com.kosmo.nbbangapp.MainActivity;
 import com.kosmo.nbbangapp.R;
+import com.kosmo.nbbangapp.info.MyUrl;
+import com.kosmo.nbbangapp.models.MemberItem;
+import com.kosmo.nbbangapp.models.RespItem;
+import com.kosmo.nbbangapp.retrofit.LoginService;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class SignUpActivity extends AppCompatActivity {
     private static final String TAG = "CHECKER";
@@ -31,6 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText edt_email,edt_password,edt_name,edt_nickname,edt_birth,edt_phone;
     private RadioGroup radioGroup;
     private CheckBox cbox_media,cbox_life,cbox_lecture;
+    private int check_cnt=0;
     private boolean[] input_toggle = new boolean[7];
     private Button btn_regist;
     private Dialog dialog;
@@ -59,6 +74,14 @@ public class SignUpActivity extends AppCompatActivity {
 
         if(!type.equals("general")){
             //연동로그인 회원가입시 미리 기입할 것
+
+            edt_email.setText(getIntent.getStringExtra("email"));
+            edt_email.setEnabled(false);
+            input_toggle[0] = true;
+            edt_password.setVisibility(View.INVISIBLE);
+            input_toggle[1] = true;
+            edt_name.setText(getIntent.getStringExtra("name"));
+            input_toggle[2] = true;
         }
 
 
@@ -168,7 +191,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
 
                 //940319
-                if(!Pattern.compile("^\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|[3][01])").matcher(s.toString()).matches()){
+                if(!Pattern.compile("^\\d{4}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|[3][01])").matcher(s.toString()).matches()){
                     input_toggle[4] = false;
                 }else{
                     input_toggle[4] = true;
@@ -245,6 +268,40 @@ public class SignUpActivity extends AppCompatActivity {
                 dialog.show();
 
 
+
+                Retrofit retrofit =new Retrofit.Builder()
+                        .baseUrl(MyUrl.NBBANGBaseURL)
+                        .addConverterFactory(JacksonConverterFactory.create())
+                        .build();
+
+                LoginService loginService = retrofit.create(LoginService.class);
+
+
+                Call<RespItem> call = loginService.registMember(setMemberItem());
+
+                call.enqueue(new Callback<RespItem>() {
+                    @Override
+                    public void onResponse(Call<RespItem> call, Response<RespItem> response) {
+                        if(response.isSuccessful()){
+
+                            RespItem resp = response.body();
+                            Toast.makeText(getApplicationContext(),"결과 : " + resp.getResp_code(),Toast.LENGTH_SHORT).show();
+                            if(resp.getResp_code().equals("success")){
+                                dialog.dismiss();
+                                goToMain(getApplicationContext());
+                            }else{
+                                Toast.makeText(getApplicationContext(),"가입에 실패하였습니다. ",Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<RespItem> call, Throwable t) {
+                        Log.d(TAG, "onFailure: "+t.getMessage());
+                    }
+                });
+
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -261,6 +318,43 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void goToMain(Context context){
+        Intent intent = new Intent(context.getApplicationContext(), MainActivity.class);
+        intent.putExtra("email",setMemberItem().getEmail());
+        startActivity(intent);
+        finish();
+    }
+
+
+    private MemberItem setMemberItem(){
+        MemberItem res = new MemberItem();
+        String pw = !getIntent.getStringExtra("type").equals("general") ? null :edt_password.getText().toString() ;
+        String gender = radioGroup.getCheckedRadioButtonId() == R.id.rbtn_man ? "man" : "min";
+        ArrayList<String> arr = new ArrayList<>();
+        if(cbox_life.isChecked()){
+            arr.add(cbox_life.getText().toString());
+        }
+        if(cbox_media.isChecked()){
+            arr.add(cbox_media.getText().toString());
+        }
+        if(cbox_lecture.isChecked()){
+            arr.add(cbox_lecture.getText().toString());
+        }
+
+
+        res.setEmail(edt_email.getText().toString());
+        res.setPassword(pw);
+        res.setName(edt_name.getText().toString());
+        res.setNickname(edt_nickname.getText().toString());
+        res.setBirthdate(edt_birth.getText().toString());
+        res.setGender(gender);
+        res.setTel(edt_phone.getText().toString());
+        res.setPreference(Arrays.toString(arr.toArray(new String[arr.size()])));
+        res.setUsertype("NULL");
+
+        return res;
     }
 
     private String validate() {

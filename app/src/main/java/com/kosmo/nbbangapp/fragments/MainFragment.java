@@ -26,14 +26,18 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        view.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Clicked a button!", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        view.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getContext(), "Clicked a button!", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 //        ViewPager pager = (ViewPager) view.findViewById(R.id.pager);
 //        pager.setAdapter(new PagerAdapter());
+
+
+
+
         return view;
     }
 
