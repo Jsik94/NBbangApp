@@ -6,7 +6,7 @@
         <item>Community</item>
         <item>Calendar</item>
     </array>
-    <string name="app_name">NBbangApp</string>
+    <string name="app_name">NBbang</string>
     <string name="tv_loading1">나의 효율적인 소비습관</string>
     <string name="title_activity_test">test</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
